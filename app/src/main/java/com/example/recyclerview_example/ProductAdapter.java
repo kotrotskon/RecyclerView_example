@@ -1,6 +1,7 @@
 package com.example.recyclerview_example;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,14 @@ public class ProductAdapter extends RecyclerView.Adapter {
         ((MyViewHolder)holder).txtVw_price.setText(String.valueOf(products.get(position).getPrice()));
         Picasso.with(context).load("https://cdn.plaisio.gr/mms/Product-Images/PlaisioGr/3/5/9/8/4/1/1/3598411.jpg").resize(250, 250).
                 centerCrop().into(((MyViewHolder)holder).imageView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView txtVw_title = view.findViewById(R.id.txtVw_title);
+                Log.d("CLICK", txtVw_title.getText().toString());
+            }
+        });
     }
 
     @Override
