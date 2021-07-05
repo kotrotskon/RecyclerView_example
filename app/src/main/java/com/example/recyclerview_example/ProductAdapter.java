@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -32,9 +35,12 @@ public class ProductAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ((MyViewHolder)holder).txtVw_id.setText(String.valueOf(products.get(position).getId()));
         ((MyViewHolder)holder).txtVw_title.setText(products.get(position).getTitle());
         ((MyViewHolder)holder).txtVw_description.setText(products.get(position).getDescription());
         ((MyViewHolder)holder).txtVw_price.setText(String.valueOf(products.get(position).getPrice()));
+        Picasso.with(context).load("https://cdn.plaisio.gr/mms/Product-Images/PlaisioGr/3/5/9/8/4/1/1/3598411.jpg").resize(250, 250).
+                centerCrop().into(((MyViewHolder)holder).imageView);
     }
 
     @Override
@@ -43,15 +49,19 @@ public class ProductAdapter extends RecyclerView.Adapter {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
+        TextView txtVw_id;
         TextView txtVw_title;
         TextView txtVw_description;
         TextView txtVw_price;
+        ImageView imageView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            txtVw_id = itemView.findViewById(R.id.txtVw_id);
             txtVw_title = itemView.findViewById(R.id.txtVw_title);
             txtVw_description = itemView.findViewById(R.id.txtVw_description);
             txtVw_price = itemView.findViewById(R.id.txtVw_price);
+            imageView = itemView.findViewById(R.id.imageView);
         }
     }
 }
