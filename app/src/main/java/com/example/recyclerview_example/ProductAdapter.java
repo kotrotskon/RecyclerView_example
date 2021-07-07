@@ -1,6 +1,7 @@
 package com.example.recyclerview_example;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,8 +47,17 @@ public class ProductAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView txtVw_title = view.findViewById(R.id.txtVw_title);
-                Log.d("CLICK", txtVw_title.getText().toString());
+                Intent intent = new Intent(context, ProductActivity.class);
+                intent.putExtra("title", ((TextView)(view.findViewById(R.id.txtVw_title))).getText().toString());
+                context.startActivity(intent);
+            }
+        });
+
+        ((MyViewHolder)holder).txtVw_price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView txtVw_price = view.findViewById(R.id.txtVw_price);
+                Log.d("CLICK", txtVw_price.getText().toString());
             }
         });
     }
