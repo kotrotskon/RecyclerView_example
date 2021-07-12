@@ -39,7 +39,7 @@ public class ProductAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((MyViewHolder)holder).txtVw_id.setText(String.valueOf(products.get(position).getId()));
         ((MyViewHolder)holder).txtVw_title.setText(products.get(position).getTitle());
-        ((MyViewHolder)holder).txtVw_description.setText(products.get(position).getDescription());
+        ((MyViewHolder)holder).txtVw_description.setText(products.get(position).getDescription().substring(0, 10));
         ((MyViewHolder)holder).txtVw_price.setText(String.valueOf(products.get(position).getPrice()));
         Picasso.with(context).load("https://cdn.plaisio.gr/mms/Product-Images/PlaisioGr/3/5/9/8/4/1/1/3598411.jpg").resize(250, 250).
                 centerCrop().into(((MyViewHolder)holder).imageView);
@@ -49,6 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter {
             public void onClick(View view) {
                 Intent intent = new Intent(context, ProductActivity.class);
                 intent.putExtra("title", ((TextView)(view.findViewById(R.id.txtVw_title))).getText().toString());
+                intent.putExtra("description", products.get(position).getDescription());
                 context.startActivity(intent);
             }
         });
